@@ -18,9 +18,11 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:bg-indigo-500 transition-colors">
-                W
-              </div>
+              <img
+                src="/wandev.png"
+                alt="WanDev Logo"
+                className="w-10 h-10 object-contain group-hover:scale-110 transition-transform"
+              />
               <span className="text-xl font-bold tracking-tight">WanDev</span>
             </Link>
 
@@ -29,9 +31,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-indigo-600 ${
-                    location.pathname === item.href ? 'text-indigo-600' : 'text-slate-500 dark:text-slate-400'
-                  }`}
+                  className={`text-sm font-medium transition-colors hover:text-indigo-600 ${location.pathname === item.href ? 'text-indigo-600' : 'text-slate-500 dark:text-slate-400'
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -53,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDarkMode }) => {
             >
               Shop Templates
             </Link>
-            <button 
+            <button
               className="md:hidden p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
