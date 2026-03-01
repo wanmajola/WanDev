@@ -5,10 +5,39 @@ const Contact: React.FC = () => {
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSent, setIsSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSent(true);
-    setTimeout(() => setIsSent(false), 5000);
+
+    // Create FormData object for better Formspree compatibility
+    const formData = new FormData();
+    formData.append('name', formState.name);
+    formData.append('email', formState.email);
+    formData.append('subject', formState.subject);
+    formData.append('message', formState.message);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mreavldq", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSent(true);
+        setFormState({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setIsSent(false), 5000);
+      } else {
+        console.error("Formspree Error:", data);
+        alert(`Oops! Submission failed: ${data.error || 'Please try again.'}`);
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      alert("Oops! There was a problem submitting your form. Please check your connection.");
+    }
   };
 
   return (
@@ -17,10 +46,10 @@ const Contact: React.FC = () => {
         <div>
           <h1 className="text-5xl font-extrabold mb-8 leading-tight">Need help with a <span className="text-indigo-600">template</span>?</h1>
           <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed mb-12">
-            Whether you have questions about a license, need technical assistance, or just want to say hi, 
+            Whether you have questions about a license, need technical assistance, or just want to say hi,
             our support team is ready to help. Most inquiries are answered within 24 hours.
           </p>
-          
+
           <div className="space-y-8">
             <div className="flex gap-6">
               <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-indigo-600 text-xl flex-shrink-0">
@@ -28,7 +57,7 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h4 className="font-bold text-lg mb-1">Email Support</h4>
-                <p className="text-slate-500 dark:text-slate-400">support@wandev.marketplace</p>
+                <p className="text-slate-500 dark:text-slate-400">wandev.site@gmail.com</p>
               </div>
             </div>
             <div className="flex gap-6">
@@ -69,33 +98,33 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Name</label>
-                  <input 
+                  <input
                     required
-                    type="text" 
+                    type="text"
                     className="w-full px-4 py-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 outline-none focus:border-indigo-600 transition-all"
                     placeholder="John Doe"
                     value={formState.name}
-                    onChange={e => setFormState({...formState, name: e.target.value})}
+                    onChange={e => setFormState({ ...formState, name: e.target.value })}
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Email</label>
-                  <input 
+                  <input
                     required
-                    type="email" 
+                    type="email"
                     className="w-full px-4 py-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 outline-none focus:border-indigo-600 transition-all"
                     placeholder="john@example.com"
                     value={formState.email}
-                    onChange={e => setFormState({...formState, email: e.target.value})}
+                    onChange={e => setFormState({ ...formState, email: e.target.value })}
                   />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Subject</label>
-                <select 
+                <select
                   className="w-full px-4 py-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 outline-none focus:border-indigo-600 transition-all"
                   value={formState.subject}
-                  onChange={e => setFormState({...formState, subject: e.target.value})}
+                  onChange={e => setFormState({ ...formState, subject: e.target.value })}
                 >
                   <option value="">Select an option</option>
                   <option value="technical">Technical Support</option>
@@ -106,13 +135,13 @@ const Contact: React.FC = () => {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Message</label>
-                <textarea 
+                <textarea
                   required
                   rows={5}
                   className="w-full px-4 py-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 outline-none focus:border-indigo-600 transition-all"
                   placeholder="How can we help you?"
                   value={formState.message}
-                  onChange={e => setFormState({...formState, message: e.target.value})}
+                  onChange={e => setFormState({ ...formState, message: e.target.value })}
                 ></textarea>
               </div>
               <button className="w-full py-5 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">

@@ -18,8 +18,8 @@ const Footer: React.FC = () => {
             <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all">
               <i className="fab fa-twitter"></i>
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all">
-              <i className="fab fa-github"></i>
+            <a href="https://www.instagram.com/wandev.site/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-pink-600 hover:border-pink-600 transition-all">
+              <i className="fab fa-instagram"></i>
             </a>
             <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all">
               <i className="fab fa-dribbble"></i>
