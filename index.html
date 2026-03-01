@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,24 +15,35 @@
     body {
       font-family: 'Inter', sans-serif;
     }
+
     .glass {
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(229, 231, 235, 0.5);
     }
+
     .dark .glass {
       background: rgba(17, 24, 39, 0.8);
       border-bottom: 1px solid rgba(55, 65, 81, 0.5);
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .animate-fade-in {
       animation: fadeIn 0.5s ease-out forwards;
     }
   </style>
-<script type="importmap">
+  <script type="importmap">
 {
   "imports": {
     "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
@@ -42,10 +53,11 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
+
 <body class="bg-slate-50 text-slate-900 transition-colors duration-300">
   <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
